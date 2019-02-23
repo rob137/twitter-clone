@@ -5,6 +5,7 @@ const monk = require('monk');
 const port = 5001;
 const app = express();
 const db = monk('localhost/tweet-clone');
+const tweets = db.get('tweets');
 
 app.use(cors());
 app.use(express.json());
@@ -26,7 +27,9 @@ app.post('/tweets', (req, res) => {
       name: req.body.name.toString(),
       content: req.body.content.toString(),
     };
-    res.json(tweet);
+    tweets
+    .insert(tweet)
+    .then(createdTweet => res.json(createdTweet));
   } else {
     res.status(422);
     res.json({ message: 'Name and content are required!'});
