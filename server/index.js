@@ -20,6 +20,12 @@ app.get('/', (req, res) => {
   });
 });
 
+app.get('/tweets', (req, res) => {
+  tweets
+    .find()
+    .then(tweets => res.json(tweets));
+});
+
 app.post('/tweets', (req, res) => {
   if (isValid(req.body)) {
     // insert into db..
@@ -28,11 +34,11 @@ app.post('/tweets', (req, res) => {
       content: req.body.content.toString(),
     };
     tweets
-    .insert(tweet)
-    .then(createdTweet => res.json(createdTweet));
+      .insert(tweet)
+      .then(createdTweet => res.json(createdTweet));
   } else {
     res.status(422);
-    res.json({ message: 'Name and content are required!'});
+    res.json({ message: 'Name and content are required!' });
   }
 });
 
