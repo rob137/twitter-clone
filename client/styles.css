@@ -2,7 +2,8 @@
   text-align: center;
 }
 
-.form {
+.form, .loading{
   width: 50%;
   margin: 0 auto;
 }
+
