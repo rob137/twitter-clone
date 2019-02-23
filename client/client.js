@@ -41,8 +41,19 @@ function showAllTweets() {
   fetch(API_URL, { method: 'GET' })
     .then(response => response.json())
     .then(tweets => {
-      console.log(tweets);
-      loadingElement.style.display = '';
+      loadingElement.style.display = 'none';
+      tweets.forEach(tweet => {
+        const div = document.createElement('div');
+        const h3 = document.createElement('h3');
+        const p = document.createElement('p');
+        h3.textContent = tweet.name;
+        p.textContent = tweet.content;
+
+        div.appendChild(h3);
+        div.appendChild(p)
+
+        tweetsElement.append(div);
+      });
     })
     .catch(err => console.error(err));
 };
