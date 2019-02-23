@@ -23,6 +23,10 @@ form.addEventListener('submit', (event) => {
     },
   })
   .then(response => response.json())
-  .then(data => console.log(data))
+  .then(createdTweet => {
+    console.log(createdTweet);
+    form.style.display = '';
+    loadingElement.style.display = 'none';
+  })
   .catch((err) => console.error(err));
 });
