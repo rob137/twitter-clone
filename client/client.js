@@ -1,5 +1,7 @@
 const form = document.querySelector('form');
 const loadingElement = document.querySelector('.loading');
+const POST_URL = 'http://localhost:5001/tweets';
+
 
 loadingElement.style.display = 'none';
 
@@ -9,7 +11,15 @@ form.addEventListener('submit', (event) => {
   const name = formData.get('name');
   const content = formData.get('content');
   const tweet = { name, content };
-  console.log(tweet);
+
   form.style.display = 'none';
   loadingElement.style.display = '';
+
+  fetch(POST_URL, {
+    method: 'POST',
+    body: tweet,
+    header: {
+      'content-type': 'application/json',
+    },
+  });  
 });
