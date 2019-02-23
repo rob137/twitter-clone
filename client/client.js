@@ -30,6 +30,7 @@ form.addEventListener('submit', (event) => {
     .then(response => response.json())
     .then(createdTweet => {
       console.log(createdTweet);
+      form.reset();
       form.style.display = '';
       loadingElement.style.display = 'none';
     })
