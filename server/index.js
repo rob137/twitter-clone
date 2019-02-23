@@ -1,8 +1,10 @@
 const express = require('express');
 const cors = require('cors');
+const monk = require('monk');
 
 const port = 5001;
 const app = express();
+const db = monk('localhost/tweet-clone');
 
 app.use(cors());
 app.use(express.json());
