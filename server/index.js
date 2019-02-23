@@ -1,15 +1,19 @@
 const express = require('express');
+const cors = require('cors');
 
 const port = 5001;
 const app = express();
 
+app.use(express.json());
+
+app.use(cors);
 app.get('/', (req, res) => {
   res.json({
     message: 'Request received'
   })
 })
 
-app.post('/mews', (req, res) => {
+app.post('/tweets', (req, res) => {
   console.log(req.body);
 })
 
