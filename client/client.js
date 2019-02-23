@@ -34,6 +34,7 @@ form.addEventListener('submit', (event) => {
       form.style.display = '';
       loadingElement.style.display = 'none';
     })
+    .then(() => showAllTweets())
     .catch((err) => console.error(err));
 });
 
