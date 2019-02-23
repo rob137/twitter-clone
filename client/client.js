@@ -44,6 +44,7 @@ function showAllTweets() {
     .then(response => response.json())
     .then(tweets => {
       loadingElement.style.display = 'none';
+      tweets.reverse();
       tweets.forEach(tweet => {
         const div = document.createElement('div');
         const h3 = document.createElement('h3');
