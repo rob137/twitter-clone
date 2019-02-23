@@ -39,6 +39,7 @@ form.addEventListener('submit', (event) => {
 });
 
 function showAllTweets() {
+  tweetsElement.innerHTML = '';
   fetch(API_URL, { method: 'GET' })
     .then(response => response.json())
     .then(tweets => {
