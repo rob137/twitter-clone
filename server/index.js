@@ -9,6 +9,10 @@ app.get('/', (req, res) => {
   })
 })
 
+app.post('/mews', (req, res) => {
+  console.log(req.body);
+})
+
 app.listen(port, () => {
   console.log(`Server is listening on http://localhost:${port}`);
 });
