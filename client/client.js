@@ -4,12 +4,9 @@ const tweetsElement = document.querySelector('.tweets');
 const loadingElement = document.querySelector('.loading');
 const API_URL = 'http://localhost:5001/tweets';
 
-body.onload = fetch(API_URL, { method: 'GET' })
-  .then(response => response.json())
-  .then(tweets => {
-    console.log(tweets);
-  })
-  .catch(err => console.error(err));
+loadingElement.display = '';
+
+showAllTweets();
 
 loadingElement.style.display = 'none';
 
@@ -38,3 +35,13 @@ form.addEventListener('submit', (event) => {
     })
     .catch((err) => console.error(err));
 });
+
+function showAllTweets() {
+  fetch(API_URL, { method: 'GET' })
+    .then(response => response.json())
+    .then(tweets => {
+      console.log(tweets);
+      loadingElement.style.display = '';
+    })
+    .catch(err => console.error(err));
+};
