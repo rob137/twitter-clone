@@ -24,6 +24,7 @@ app.post('/tweets', (req, res) => {
       name: req.body.name.toString(),
       content: req.body.content.toString(),
     };
+    res.json(tweet);
   } else {
     res.json({ message: 'Name and content are required!'});
   }
