@@ -51,19 +51,33 @@ function showAllTweets() {
         const p = document.createElement('p');
         const button = document.createElement('button');
 
-        div.setAttribute('_id', tweet._id);
         div.className = 'tweet';
         h3.textContent = tweet.name;
         p.textContent = tweet.content;
         button.textContent = 'delete';
         button.className = 'button button-delete'
+        button.setAttribute('_id', tweet._id);
 
         div.appendChild(h3);
         div.appendChild(p);
         div.appendChild(button);
+        button.addEventListener('click', (e) => {
+          e.preventDefault();
+          deleteTweet(e.target.getAttribute('_id'));
+        });
 
         tweetsElement.append(div);
       });
     })
     .catch(err => console.error(err));
 };
+
+function deleteTweet(id) {
+  fetch(API_URL, {
+    method: 'DELETE',
+    body: { id }
+  })
+  .then(res => res.json())
+  .then(data => console.log(data))
+  .catch(err => console.error(err));
+}
