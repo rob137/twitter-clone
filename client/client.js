@@ -49,14 +49,18 @@ function showAllTweets() {
         const div = document.createElement('div');
         const h3 = document.createElement('h3');
         const p = document.createElement('p');
+        const button = document.createElement('button');
 
         div.setAttribute('_id', tweet._id);
-
+        div.className = 'tweet';
         h3.textContent = tweet.name;
         p.textContent = tweet.content;
+        button.textContent = 'delete';
+        button.className = 'button button-delete'
 
         div.appendChild(h3);
-        div.appendChild(p)
+        div.appendChild(p);
+        div.appendChild(button);
 
         tweetsElement.append(div);
       });
