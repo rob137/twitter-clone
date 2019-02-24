@@ -49,6 +49,17 @@ app.post('/tweets', postTweetLimiter, (req, res) => {
   }
 });
 
+app.delete('/tweets/:id', (req, res) => {
+  const id = req.params.id;
+  tweets.remove({ _id: id })
+  .then(outcome => {
+    if (outcome.result.ok === 1) {
+      res.status(200);
+      res.json({ message: `Tweet deleted!`});
+    }
+  });
+});
+
 app.listen(port, () => {
   console.log(`Server is listening on http://localhost:${port}`);
 });
