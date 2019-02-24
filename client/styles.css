@@ -5,6 +5,7 @@
 .form, .loading{
   width: 50%;
   margin: 0 auto;
+  margin-bottom: 40px !important;
 }
 
 .loading {
@@ -12,6 +13,10 @@
 }
 
 .tweets {
-  width: 80%;
+  width: 50%;
   margin: 0 auto;
+}
+
+.tweet {
+  margin-bottom: 40px;
 }
