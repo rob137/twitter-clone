@@ -20,3 +20,8 @@
 .tweet {
   margin-bottom: 40px;
 }
+
+.date {
+  font-style: italic;
+  font-size: 12px;
+}

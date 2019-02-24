@@ -47,19 +47,24 @@ function showAllTweets() {
       tweets.forEach(tweet => {
         const div = document.createElement('div');
         const h3 = document.createElement('h3');
+        const span = document.createElement('span');
         const p = document.createElement('p');
         const button = document.createElement('button');
 
         div.className = 'tweet';
         h3.textContent = tweet.name;
+        span.className = 'date';
+        span.textContent = new Date(tweet.created).toDateString();
         p.textContent = tweet.content;
         button.textContent = 'delete';
         button.className = 'button button-delete'
         button.setAttribute('_id', tweet._id);
 
         div.appendChild(h3);
+        div.appendChild(span);
         div.appendChild(p);
         div.appendChild(button);
+
         button.addEventListener('click', (e) => {
           e.preventDefault();
           const id = e.target.getAttribute('_id');
