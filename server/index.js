@@ -39,6 +39,7 @@ app.post('/tweets', postTweetLimiter, (req, res) => {
     const tweet = {
       name: filter.clean(req.body.name.toString()),
       content: filter.clean(req.body.content.toString()),
+      created: new Date(),
     };
     tweets
       .insert(tweet)
