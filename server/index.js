@@ -1,11 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 const monk = require('monk');
+const Filter = require('bad-words');
 
 const port = 5001;
 const app = express();
 const db = monk('localhost/tweet-clone');
 const tweets = db.get('tweets');
+const filter = new Filter();
 
 app.use(cors());
 app.use(express.json());
@@ -30,8 +32,8 @@ app.post('/tweets', (req, res) => {
   if (isValid(req.body)) {
     // insert into db..
     const tweet = {
-      name: req.body.name.toString(),
-      content: req.body.content.toString(),
+      name: filter.clean(req.body.name.toString()),
+      content: filter.clean(req.body.content.toString()),
     };
     tweets
       .insert(tweet)
