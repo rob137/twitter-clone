@@ -1,4 +1,4 @@
-2const express = require('express');
+const express = require('express');
 const cors = require('cors');
 const monk = require('monk');
 const Filter = require('bad-words');
@@ -9,32 +9,31 @@ const app = express();
 const db = monk('localhost/tweet-clone');
 const tweets = db.get('tweets');
 const filter = new Filter();
-const limiter = rateLimit({
-  windowMs: 5 * 60 * 1000, // 5 minutes
-  max: 300 // limite each IP to 300 requests per windowMs
-})
 
 app.use(cors());
 app.use(express.json());
-app.use (limiter);
+
+const getTweetsLimiter = rateLimit({
+  windowMs: 5 * 60 * 1000, // 5 minutes
+  max: 100, // limite each IP to 100 requests per windowMs
+});
+
+const postTweetLimiter = rateLimit({
+  windowMs: 2 * 60 * 1000,
+  max: 1,
+});
 
 const isValid = (tweet) => {
   return tweet.name && tweet.name.toString().trim() !== '';
 }
 
-app.get('/', (req, res) => {
-  res.json({
-    message: 'Request received'
-  });
-});
-
-app.get('/tweets', (req, res) => {
+app.get('/tweets', getTweetsLimiter, (req, res) => {
   tweets
     .find()
     .then(tweets => res.json(tweets));
 });
 
-app.post('/tweets', (req, res) => {
+app.post('/tweets', postTweetLimiter, (req, res) => {
   if (isValid(req.body)) {
     // sanitise swearwords and insert into db..
     const tweet = {
