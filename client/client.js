@@ -29,7 +29,6 @@ form.addEventListener('submit', (event) => {
   })
     .then(response => response.json())
     .then(createdTweet => {
-      console.log(createdTweet);
       form.reset();
       form.style.display = '';
       loadingElement.style.display = 'none';
@@ -63,7 +62,8 @@ function showAllTweets() {
         div.appendChild(button);
         button.addEventListener('click', (e) => {
           e.preventDefault();
-          deleteTweet(e.target.getAttribute('_id'));
+          const id = e.target.getAttribute('_id');
+          deleteTweet(id);
         });
 
         tweetsElement.append(div);
@@ -73,11 +73,11 @@ function showAllTweets() {
 };
 
 function deleteTweet(id) {
-  fetch(API_URL, {
+  fetch(`${API_URL}/${id}`, {
     method: 'DELETE',
     body: { id }
   })
   .then(res => res.json())
-  .then(data => console.log(data))
+  .then(() => showAllTweets())
   .catch(err => console.error(err));
 }
