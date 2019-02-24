@@ -49,6 +49,9 @@ function showAllTweets() {
         const div = document.createElement('div');
         const h3 = document.createElement('h3');
         const p = document.createElement('p');
+
+        div.setAttribute('_id', tweet._id);
+
         h3.textContent = tweet.name;
         p.textContent = tweet.content;
 
